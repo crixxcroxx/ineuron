@@ -7,14 +7,18 @@ class S3Operation:
     def __init__(self):
         pass
 
-    def sync_folder_to_s3() -> None:
+    def sync_folder_to_s3(self, folder:str, bucket_name:str, bucket_folder_name:str) -> None:
         try:
-            pass
+            command:str = f"aws s3 sync {folder} s3://{bucket_name}/{bucket_folder_name}"
+            os.system(command)
+
         except Exception as e:
             raise XRayException(e, sys)
         
-    def sync_folder_from_s3() -> None:
+    def sync_folder_from_s3(self, folder:str, bucket_name:str, bucket_foder_name:str) -> None:
         try:
-            pass
+            command:str = f"aws s3 sync s3://{bucket_name}/{bucket_foder_name}/{folder}"
+            os.system(command)
+
         except Exception as e:
-            raise XRayException(e, sys)
+            raise XRayException(e, sys) 
