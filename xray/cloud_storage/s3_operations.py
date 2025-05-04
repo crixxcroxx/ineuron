@@ -15,6 +15,10 @@ class S3Operation:
         try:
             command:str = f"{self.docker_command} aws s3 sync {folder} s3://{bucket_name}/{bucket_folder_name}"
             os.system(command)
+            
+            # TODO: REMOVE THESE 2 LINES AFTER
+            chown_command = f"sudo chown -R {os.getuid()}:{os.getgid()} artifacts"
+            os.system(chown_command)
 
         except Exception as e:
             raise XRayException(e, sys)
@@ -23,6 +27,10 @@ class S3Operation:
         try:
             command:str = f"{self.docker_command} aws s3 sync s3://{bucket_name}/{bucket_foder_name} {folder}"
             os.system(command)
+
+            # TODO: REMOVE THESE 2 LINES AFTER
+            chown_command = f"sudo chown -R {os.getuid()}:{os.getgid()} artifacts"
+            os.system(chown_command)
 
         except Exception as e:
             raise XRayException(e, sys) 
