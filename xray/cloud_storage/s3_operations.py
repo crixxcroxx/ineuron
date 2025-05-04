@@ -2,24 +2,14 @@ import os
 import sys
 from xray.exception import XRayException
 
-from xray.logger import logging
-
 
 class S3Operation:
     def __init__(self):
         image_id = "feba658416e3"
         aws_config_path = os.path.join(os.path.expanduser('~'), '.aws')
         current_dir = os.getcwd()
-        # self.docker_command_base = [
-        #     "docker", "run",
-        #     "--rm",
-        #     "--entrypoint", "", # Override the image's entrypoint
-        #     "-v", f"{aws_config_path}:/root/.aws",
-        #     "-v", f"{current_dir}:/aws",
-        #     image_id,
-        # ]
 
-        self.docker_command = 'docker run --rm --entrypoint "" -v /home/cr1xx/.aws:/root/.aws -v /home/cr1xx/Documents/praktis/pytorch/ineuron:/aws feba658416e3'
+        self.docker_command = f'docker run --rm --entrypoint "" -v {aws_config_path}:/root/.aws -v {current_dir}:/aws {image_id}'
 
     def sync_folder_to_s3(self, folder:str, bucket_name:str, bucket_folder_name:str) -> None:
         try:
@@ -36,3 +26,4 @@ class S3Operation:
 
         except Exception as e:
             raise XRayException(e, sys) 
+        
