@@ -7,6 +7,7 @@ class DataIngestionArtifact:
     train_file_path:str
     test_file_path:str
 
+
 @dataclass
 class DataTranformationArtifact:
     transformed_train_object:DataLoader
@@ -14,3 +15,8 @@ class DataTranformationArtifact:
     
     train_transform_file_path:str
     test_transform_file_path:str
+
+
+@dataclass
+class ModelTrainerArtifact:
+    trained_model_path:str 

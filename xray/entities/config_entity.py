@@ -17,6 +17,7 @@ class DataIngestionConfig:
     train_data_path:str = os.path.join(data_path, "train")
     test_data_path:str = os.path.join(data_path, "test")
 
+
 @dataclass
 class DataTransformationConfig:
     color_jitter_transformation:dict = field(default_factory=lambda: {
@@ -46,3 +47,21 @@ class DataTransformationConfig:
     resize:int = RESIZE
     center_crop:int = CENTER_CROP
     random_rotation:int = RANDOM_ROTATION
+
+
+@dataclass
+class ModelTrainerConfig:
+    artifact_dir:str = os.path.join(ARTIFACT_DIR, TIME_STAMP, "model_training")
+    trained_bentoml_model_name:str = "xray_model"
+    trained_model_path:str = os.path.join(artifact_dir, TRAINED_MODEL_NAME)
+    train_transforms_key:str = TRAIN_TRANSFORMS_KEY
+    epochs:int = EPOCH
+    device:str = DEVICE
+    optimizer_params:dict = field(default_factory=lambda: {
+        "lr": 0.01,
+        "momentum": 0.8
+    })
+    scheduler_params:dict = field(default_factory=lambda: {
+        "step_size": STEP_SIZE,
+        "gamma": GAMMA
+    })
