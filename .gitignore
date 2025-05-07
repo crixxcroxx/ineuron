@@ -9,8 +9,8 @@ wheels/
 # Virtual environments
 .venv
 
-# logs
+# log files
 /logs
 
-# artifacts
+# artifacts (imgs/pkl/pt)
 /artifacts
